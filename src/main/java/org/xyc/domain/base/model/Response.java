@@ -4,63 +4,57 @@ import lombok.*;
 import org.xyc.domain.base.enums.ResponseCode;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
 
+/**
+ * 响应统一返回类
+ * @param <T>
+ */
 @Data
 public class Response<T> implements Serializable {
 
-    private int code;
-    private String message;
-    private int count;
-    private T detail;
+    private static final long serialVersionUID = -1738123821727462008L;
 
-    public static Response success(Object data) {
-        return success(null, data);
+    /**
+     * 接口响应编码
+     */
+    private Integer code;
+
+    /**
+     * 提示信息
+     */
+    private String msg;
+
+    /**
+     * 响应内容
+     */
+    private T data;
+
+    /**
+     * 是否成功
+     */
+    private Boolean success;
+
+    public static <T> Response<T> success(T data){
+        return success(data, ResponseCode.SUCCESS.getCode());
     }
 
-    public static Response success(String message) {
-        return success(message, null);
-    }
-
-    public static <T> Response<T> success(String message, T data) {
-        Response response = new Response();
-        response.setCode(ResponseCode.SUCCESS.getCode());
-        response.setMessage(message);
-        response.setDetail(data);
-
-        if (Objects.nonNull(data)) {
-            if (data instanceof List) {
-                response.setCount(((List)data).size());
-            } else {
-                response.setCount(1);
-            }
-        }
-        return response;
-    }
-
-    public static Response fail(String message) {
-        return fail(ResponseCode.FAIL.getCode(), message);
-    }
-
-    public static Response fail(Integer code,String message) {
-        Response response = new Response();
+    public static <T> Response<T> success(T data,Integer code){
+        Response<T> response = new Response<>();
+        response.setData(data);
+        response.setSuccess(true);
         response.setCode(code);
-        response.setMessage(message);
         return response;
     }
 
-
-    public static Response fail(ResponseCode responseCode) {
-        return fail(responseCode.getCode(), responseCode.getMessage());
+    public static <T> Response<T> fail(String msg){
+        return fail(msg,ResponseCode.FAIL.getCode());
     }
 
-    public static boolean isSuccess(Response response) {
-        return null != response && ResponseCode.SUCCESS.getCode().equals(response.getCode());
+    public static <T> Response<T> fail(String msg, Integer code){
+        Response<T> response = new Response<>();
+        response.setSuccess(false);
+        response.setMsg(msg);
+        response.setCode(code);
+        return response;
     }
-
-    public static boolean isFail(Response response) {
-        return !isSuccess(response);
-    }
-
 }

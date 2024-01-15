@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 public class ModelBase<T extends Model<?>> extends Model<T> {
 
+    private static final long serialVersionUID = -7279605295963487934L;
     /**
      * 主键
      */
