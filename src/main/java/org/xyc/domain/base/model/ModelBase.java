@@ -1,5 +1,7 @@
 package org.xyc.domain.base.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
@@ -12,6 +14,7 @@ public class ModelBase<T extends Model<?>> extends Model<T> {
     /**
      * 主键
      */
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
