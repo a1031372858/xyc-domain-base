@@ -2,13 +2,13 @@ package org.xyc.domain.base.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class ModelBase<T extends Model<?>> extends Model<T> {
+public class ModelBase implements Serializable {
 
     private static final long serialVersionUID = -7279605295963487934L;
     /**
