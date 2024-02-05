@@ -22,30 +22,30 @@ public class ModelBase<T extends Model<?>> extends Model<T> {
     /**
      * 是否删除
      */
-    private Integer isDelete;
+    private Integer isDeleted;
 
     /**
      * 删除时间
      */
-    private Long deleteAt;
+    private Long deletedAt;
 
     /**
      * 创建时间
      */
-    private Date createAt;
+    private Date createdAt;
 
     /**
      * 创建者
      */
-    private Long createBy;
+    private Long createdBy;
 
     /**
      * 更新时间
      */
-    private Date updateAt;
+    private Date updatedAt;
 
     /**
      * 更新者
      */
-    private Long updateBy;
+    private Long updatedBy;
 }
